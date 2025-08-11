@@ -1,73 +1,51 @@
 <?php
 
-declare(strict_types=1);
+namespace App\Infrastructure\Repositories;
 
-namespace App\Infrastructure\Persistence\User;
+use App\Domain\Models\User;
+use App\DTOs\UserDTO;
 
-use App\Domain\DomainException\User\UserAlreadyExistsException;
-use App\Domain\Model\User\User;
-use App\Domain\DomainException\User\UserNotFoundException;
-use App\Domain\Repository\UserRepository;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
+use App\Domain\Repositories\UserRepositoryInterface;
 
-class ElloquentUserRepository implements UserRepository
+class EloquentUserRepository implements UserRepositoryInterface
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function findAll(?array $filters = null): array
+    public function getMe(int $id): User
     {
-        $query = User::query();
+        return User::where('id', $id)->firstOrFail();
+    }
 
-        if ($filters) {
-            $query->where($filters);
+    public function getAll(): array
+    {
+        return User::all()->toArray();
+    }
+
+    public function getById(int $id): ?User
+    {
+        return User::where('id', $id)->first();
+    }
+
+    public function create(UserDTO $dto): User
+    {
+        $exists = User::where('email', $dto->email)->first();
+    
+        if ($exists) {
+            return $exists;
         }
-
-        return $query->get()->toArray();
+    
+        return User::create($dto->toArray());
     }
+    
 
-    /**
-     * {@inheritdoc}
-     */
-    public function findUserOfId(int $id): User
+    public function update(int $id, UserDTO $dto): bool
     {
-        try {
-            return User::findOrFail($id);
-        } catch (ModelNotFoundException $e) {
-            throw new UserNotFoundException();
-        }
+        $user = $this->getById($id);
+        return $user ? $user->update($dto->toArray()) : false;
     }
 
 
-    /**
-     * {@inheritdoc}
-     */
-    public function deleteUser(int $id): bool
+    public function delete(int $id): bool
     {
-        $user = $this->findUserOfId($id);
-        return $user->delete();
-    }
-
-
-    /**
-     * {@inheritdoc}
-     */
-    public function createUser(array $data): User
-    {
-        $user = User::create($data);
-        if (!$user) {
-            throw new UserAlreadyExistsException();
-        }
-        return $user;
-    }
-
-
-    /**
-     * {@inheritdoc}
-     */
-    public function updateUser(int $id, array $data): bool
-    {
-        $user = $this->findUserOfId($id);
-        return $user->update($data);
+        $user = User::find($id);
+        return $user ? $user->delete() : false;
     }
 }

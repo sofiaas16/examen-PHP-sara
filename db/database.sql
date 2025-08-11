@@ -1,4 +1,4 @@
--- Active: 1752434449310@@127.0.0.1@3306
+-- Active: 1754051059449@@127.0.0.1@3307
 CREATE DATABASE IF NOT EXISTS `garden`;
 
 USE `garden`;
@@ -12,6 +12,13 @@ CREATE TABLE `users` (
     `password` varchar(255) NOT NULL,
     PRIMARY KEY (`id`),
     UNIQUE KEY `email` (`email`)
+);
+
+CREATE TABLE `categoria` (
+    `id` int NOT NULL AUTO_INCREMENT,
+    `name` varchar(100) NOT NULL,
+    `familia` varchar(100) NOT NULL,
+    PRIMARY KEY (`id`)
 );
 
 INSERT INTO

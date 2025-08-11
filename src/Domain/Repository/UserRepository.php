@@ -1,44 +1,27 @@
 <?php
 
-declare(strict_types=1);
-
 namespace App\Domain\Repository;
 
-use App\Domain\Model\User\User;
+use App\Domain\Models\User;
+use App\DTOs\UserDTO;
 
-interface UserRepository
+interface UserRepositoryInterface
 {
-    /**
-     * @param ?array $filters
-     * @return User[]
-     */
-    public function findAll(?array $filters = null): array;
+    // POST
+    public function create(UserDTO $dto): User;
 
-    /**
-     * @param int $id
-     * @return User
-     * @throws UserNotFoundException
-     */
-    public function findUserOfId(int $id): User;
+    // GET
+    public function getAll(): array;
 
-    /**
-     * @param int $id
-     * @return bool
-     * @throws UserNotFoundException
-     */
-    public function deleteUser(int $id): bool;
+    // GET
+    public function getMe(int $id): User;
 
-    /**
-     * @param array $data
-     * @return User
-     * @throws UserNotFoundException
-     */
-    public function createUser(array $data): User;
+    // GET por ID
+    public function getById(int $id): ?User;
 
-    /**
-     * @param array $data
-     * @return bool
-     * @throws UserNotFoundException
-     */
-    public function updateUser(int $id, array $data): bool;
+    // PUT
+    public function update(int $id, UserDTO $dto): bool;
+
+    // DELETE
+    public function delete(int $id): bool;
 }
