@@ -21,6 +21,14 @@ CREATE TABLE `categoria` (
     PRIMARY KEY (`id`)
 );
 
+CREATE TABLE `riego` (
+    `id` int NOT NULL AUTO_INCREMENT,
+    `fecha_riego` TIMESTAMP,
+    `info_riego` VARCHAR(100),
+    PRIMARY KEY (`id`)
+);
+
+
 INSERT INTO
     `users` (`name`, `email`, `password`)
 VALUES (
@@ -36,3 +44,20 @@ VALUES (
         'ana@gmail.com',
         SHA2('h3ll0.', 512)
     );
+
+INSERT INTO
+    `categoria` (`name`, `familia`)
+VALUES (
+        'Tomatera',
+        'Solanaceae'
+    );
+
+INSERT INTO
+    `categoria` (`name`, `familia`)
+VALUES (
+        'Tomatera',
+        'Solanaceae'
+    );
+
+
+    
