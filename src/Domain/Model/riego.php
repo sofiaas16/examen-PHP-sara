@@ -11,6 +11,6 @@ class riego extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'name',
+        'fecha_riego',
     ];
 }
