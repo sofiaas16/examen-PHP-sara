@@ -6,11 +6,11 @@ use App\Middleware\RoleMiddleware;
 use Slim\App;
 
 return function (App $app) {
-    $app->group('/grupos', function ($group) {
-        $group->get('', [PlantasController::class, 'index']);
-        $group->get('/{id}', [PlantasController::class, 'show']);
-        $group->post('', [PlantasController::class, 'store']);
-        $group->put('/{id}', [PlantasController::class, 'update']);
-        $group->delete('/{id}', [PlantasController::class, 'destroy']);
+    $app->Plantas('/Plantas', function ($group) {
+        $Plantas->get('', [PlantasController::class, 'index']);
+        $Plantas->get('/{id}', [PlantasController::class, 'show']);
+        $Plantas->post('', [PlantasController::class, 'store']);
+        $Plantas->put('/{id}', [PlantasController::class, 'update']);
+        $Plantas->delete('/{id}', [PlantasController::class, 'destroy']);
     })->add(new RoleMiddleware('admin'))->add(new AuthMiddleware());
 };
