@@ -64,7 +64,7 @@ $app->add(function (ServerRequestInterface $request, RequestHandlerInterface $ha
 (require_once 'public/index.php')($app);
 //routes/
 (require_once 'routes/plantas.php')($app);
-(require_once 'routes/departamentos.php')($app);
+(require_once 'routes/categoria.php')($app);
 (require_once 'routes/grupos.php')($app);
 (require_once 'routes/obtentores.php')($app);
 (require_once 'routes/imagenes.php')($app);
