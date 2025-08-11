@@ -13,7 +13,11 @@ CREATE TABLE `users` (
     PRIMARY KEY (`id`),
     UNIQUE KEY `email` (`email`)
 );
-
+CREATE TABLE `plantas` (
+    `id` int NOT NULL AUTO_INCREMENT,
+    `name` varchar(100) NOT NULL,
+    PRIMARY KEY (`id`)
+);
 CREATE TABLE `categoria` (
     `id` int NOT NULL AUTO_INCREMENT,
     `name` varchar(100) NOT NULL,
@@ -48,16 +52,29 @@ VALUES (
 INSERT INTO
     `categoria` (`name`, `familia`)
 VALUES (
-        'Tomatera',
+        'frutal',
         'Solanaceae'
     );
 
 INSERT INTO
     `categoria` (`name`, `familia`)
 VALUES (
-        'Tomatera',
-        'Solanaceae'
+        'ornamental',
+        'Lamiaceae'
+    );
+
+INSERT INTO 
+    `riego` (`fecha_riego`, `info_riego`)
+VALUES (
+        '2025-08-09',
+        'Riego con mucha agua'
     );
 
 
-    
+INSERT INTO 
+    `riego` (`fecha_riego`, `info_riego`)
+VALUES (
+        '2025-12-10',
+        'Riego suave'
+    );
+
